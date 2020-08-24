@@ -1,0 +1,13 @@
+function(static_lib_file_ending STATIC_LIB_FILE_ENDING)
+    set(STATIC_LIB_FILE_ENDING "" PARENT_SCOPE)
+    if (WIN32)
+        set(STATIC_LIB_FILE_ENDING "lib" PARENT_SCOPE)
+    endif()
+endfunction()
+
+function(dynamic_lib_file_ending DYNAMIC_LIB_FILE_ENDING)
+    set(DYNAMIC_LIB_FILE_ENDING "" PARENT_SCOPE)
+    if (WIN32)
+        set(DYNAMIC_LIB_FILE_ENDING "dll" PARENT_SCOPE)
+    endif()
+endfunction()
