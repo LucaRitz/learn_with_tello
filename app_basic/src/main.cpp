@@ -1,9 +1,7 @@
 #include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Tabs.H>
 
 #include "loader/loader.hpp"
-#include "loader/tab_loader.hpp"
+#include "main_controller.hpp"
 #include <iostream>
 
 int main(int argc, char **argv) {
@@ -17,12 +15,11 @@ int main(int argc, char **argv) {
         }
     }
 
-    auto* window = new Fl_Window(1280,720);
-    auto* tabs = TabLoader::createTabs(modules);
-    window->resizable(tabs);
-    window->end();
-    window->label("Learn with tello");
-    window->show(argc, argv);
+    MainView mainView;
+    MainController mainController {&mainView};
+
+    mainController.setModules(modules);
+    mainController.show(argc, argv);
 
     int returnCode = Fl::run();
 

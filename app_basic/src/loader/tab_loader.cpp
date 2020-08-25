@@ -3,14 +3,12 @@
 #include <common/application.hpp>
 #include <FL/Fl_Tabs.H>
 
-Fl_Tabs* TabLoader::createTabs(vector<IApplication*>& modules) {
-    auto* tabs = new Fl_Tabs(10, 10, 1260, 700);
+void TabLoader::createTabs(Fl_Tabs& tabs, vector<IApplication*>& modules, std::function<Fl_Group*(IApplication*)>&& getView) {
     for(auto*& module : modules) {
-        auto* group = module->getView();
+        auto* group = getView(module);
         if (group != nullptr) {
-            tabs->add(group);
+            tabs.add(group);
         }
     }
-    tabs->end();
-    return tabs;
+    tabs.end();
 }

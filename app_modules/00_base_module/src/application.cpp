@@ -43,8 +43,14 @@ void Application::tearDown() {
     Network::disconnect();
 }
 
-void Application::update(ModuleId moduleId, const ISettings* settings) {
-
+void Application::update(ModuleId moduleId, ISettings* settings) {
+    switch (moduleId) {
+        case ModuleId::BASE:
+            _baseSettings.reset(dynamic_cast<BaseSettings*>(settings));
+            break;
+        default:
+            break;
+    }
 }
 
 Fl_Group* Application::getView() const {

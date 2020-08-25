@@ -22,7 +22,7 @@ public:
     [[nodiscard]] virtual vector<ModuleId> dependsOn() const = 0;
     virtual uint8_t init() = 0;
     virtual void tearDown() = 0;
-    virtual void update(ModuleId moduleId, const ISettings* settings) = 0;
+    virtual void update(ModuleId moduleId, ISettings* settings) = 0;
     [[nodiscard]] virtual Fl_Group* getView() const = 0;
 
     void addDependent(IApplication* dependent);

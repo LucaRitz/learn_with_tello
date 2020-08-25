@@ -5,6 +5,7 @@
 #include "keyboard_controller.hpp"
 
 using tello::Tello;
+using tello::Response;
 
 Application::Application() :
     _baseSettings(nullptr),
@@ -32,7 +33,7 @@ void Application::tearDown() {
 
 }
 
-void Application::update(ModuleId moduleId, const ISettings* settings) {
+void Application::update(ModuleId moduleId, ISettings* settings) {
     switch (moduleId) {
         case ModuleId::BASE:
             _baseSettings = dynamic_cast<const BaseSettings*>(settings);
