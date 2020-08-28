@@ -10,7 +10,7 @@ using std::vector;
 class BaseSettings : public ISettings {
 public:
     void setTellos(vector<Tello*> tellos);
-    [[nodiscard]] vector<Tello*> tellos() const;
+    [[nodiscard]] vector<Tello*>& tellos();
 
 private:
     vector<Tello*> _tellos;

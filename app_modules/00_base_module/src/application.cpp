@@ -1,6 +1,5 @@
 #include "application.hpp"
 
-#include <tello/tello.hpp>
 #include <tello/logger/logger.hpp>
 #include <tello/connection/network.hpp>
 #include <common/base_settings.hpp>
@@ -10,9 +9,10 @@ using tello::Logger;
 using tello::Network;
 using tello::Tello;
 
-#define TELLO_IP_ADDRESS (ip_address)0xC0A80A01
-
-Application::Application() : _baseSettings(std::make_unique<BaseSettings>()) {}
+Application::Application() :
+    _baseSettings(std::make_unique<BaseSettings>()),
+    _settingsView(std::make_unique<SettingsView>()),
+    _settingsController(std::make_unique<SettingsController>(_settingsView.get(), _baseSettings)) {}
 
 ModuleId Application::id() const {
     return ModuleId::BASE;
@@ -33,9 +33,6 @@ uint8_t Application::init() {
     const bool isConnected = Network::connect();
     short returnCode = isConnected ? 0 : 1;
 
-    auto* tello = new Tello {TELLO_IP_ADDRESS};
-    _baseSettings->setTellos(vector<Tello*> {tello});
-
     return returnCode;
 }
 
@@ -43,16 +40,18 @@ void Application::tearDown() {
     Network::disconnect();
 }
 
+bool Application::isRunning() {
+    return false;
+}
+
 void Application::update(ModuleId moduleId, ISettings* settings) {
-    switch (moduleId) {
-        case ModuleId::BASE:
-            _baseSettings.reset(dynamic_cast<BaseSettings*>(settings));
-            break;
-        default:
-            break;
-    }
+    // NOOP
 }
 
 Fl_Group* Application::getView() const {
     return nullptr;
+}
+
+ISettingsController* Application::settingsController() {
+    return _settingsController.get();
 }

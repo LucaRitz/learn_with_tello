@@ -9,8 +9,8 @@ using tello::Response;
 
 Application::Application() :
     _baseSettings(nullptr),
-    _keyboardController(std::make_unique<KeyboardController>(this)),
-    _keyboardView(std::make_unique<KeyboardView>(*_keyboardController)) {
+    _keyboardView(std::make_unique<KeyboardView>()),
+    _keyboardController(std::make_unique<KeyboardController>(_keyboardView.get(), this)){
 }
 
 ModuleId Application::id() const {
@@ -33,6 +33,10 @@ void Application::tearDown() {
 
 }
 
+bool Application::isRunning() {
+    return false;
+}
+
 void Application::update(ModuleId moduleId, ISettings* settings) {
     switch (moduleId) {
         case ModuleId::BASE:
@@ -45,4 +49,8 @@ void Application::update(ModuleId moduleId, ISettings* settings) {
 
 Fl_Group* Application::getView() const {
     return _keyboardView.get();
+}
+
+ISettingsController* Application::settingsController() {
+    return nullptr;
 }

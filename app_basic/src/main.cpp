@@ -16,9 +16,8 @@ int main(int argc, char **argv) {
     }
 
     MainView mainView;
-    MainController mainController {&mainView};
+    MainController mainController {&mainView, modules};
 
-    mainController.setModules(modules);
     mainController.show(argc, argv);
 
     int returnCode = Fl::run();

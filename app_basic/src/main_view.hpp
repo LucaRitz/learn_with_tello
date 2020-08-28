@@ -10,22 +10,27 @@ using std::vector;
 
 class IApplication;
 
-class IListener {
-public:
-    virtual ~IListener() = default;
+namespace mainview {
+    class IListener {
+    public:
+        virtual ~IListener() = default;
 
-    virtual void onSettingsPressed() const = 0;
-};
+        virtual void onSettingsPressed() = 0;
+    };
+}
 
+#include <iostream>
 class MainView : public Fl_Group {
 public:
     MainView();
+    ~MainView() override;
+
     void setModules(vector<IApplication*>& modules);
-    void setListener(IListener* listener);
+    void setListener(mainview::IListener* listener);
     void show(int argc, char **argv);
 
 private:
-    IListener* _listener;
+    mainview::IListener* _listener;
     Fl_Window _window;
     Fl_Tabs _tabs;
     Fl_Menu_Bar _menuBar;

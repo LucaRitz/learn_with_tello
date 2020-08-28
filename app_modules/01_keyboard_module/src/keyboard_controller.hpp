@@ -6,9 +6,9 @@ class Application;
 
 class KeyboardController : public IListener {
 public:
-    explicit KeyboardController(Application* module);
-    ~KeyboardController() override = default;
+    KeyboardController(KeyboardView* view, Application* module);
 
 private:
+    KeyboardView* _view;
     Application* _module;
 };

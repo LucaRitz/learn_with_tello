@@ -11,10 +11,14 @@ enum class ModuleId;
 
 class ModuleDependencyMatrix {
 public:
-    explicit ModuleDependencyMatrix(vector<IApplication*> modules);
+    explicit ModuleDependencyMatrix(vector<IApplication*>& modules);
 
     vector<IApplication*> getDependents(ModuleId moduleId);
+    vector<IApplication*> modules();
+    vector<IApplication*> modulesWithSettingsController();
 
 private:
     unordered_map<ModuleId, vector<IApplication*>> _dependentModules;
+    vector<IApplication*> _modules;
+    vector<IApplication*> _settingsController;
 };

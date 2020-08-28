@@ -28,12 +28,16 @@ MainView::MainView() : Fl_Group(20, 30, 1280, 720),
     _window.add(_menuBar);
 }
 
+MainView::~MainView() {
+    TabLoader::clear(_tabs);
+}
+
 void MainView::setModules(vector<IApplication*>& modules) {
     _tabs.clear();
     TabLoader::createTabs(_tabs, modules, [](auto* appli) { return appli->getView(); });
 }
 
-void MainView::setListener(IListener* listener) {
+void MainView::setListener(mainview::IListener* listener) {
     this->_listener = listener;
     popup[static_cast<int>(MenuItemIndex::SETTINGS)].callback(onSettingsPressed, _listener);
 }
@@ -43,5 +47,5 @@ void MainView::show(int argc, char **argv) {
 }
 
 void onSettingsPressed(Fl_Widget* widget, void* listener) {
-    static_cast<IListener*>(listener)->onSettingsPressed();
+    static_cast<mainview::IListener*>(listener)->onSettingsPressed();
 }

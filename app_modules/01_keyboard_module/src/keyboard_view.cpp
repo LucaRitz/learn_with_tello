@@ -1,8 +1,8 @@
 #include "keyboard_view.hpp"
 
-KeyboardView::KeyboardView(IListener& listener) :
+KeyboardView::KeyboardView() :
     Fl_Group(20, 55, 1280, 720, "Keyboard"),
-    _listener(listener),
+    _listener(nullptr),
     _aButton(25, 65, 100, 30, "Test Button"),
     _aBox(25, 105, 300, 200, "Label") {
 
@@ -11,4 +11,8 @@ KeyboardView::KeyboardView(IListener& listener) :
     _aBox.labelsize(36);
     _aBox.labeltype(FL_SHADOW_LABEL);
     end();
+}
+
+void KeyboardView::setListener(IListener *listener) {
+    _listener = listener;
 }

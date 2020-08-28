@@ -4,6 +4,6 @@ void BaseSettings::setTellos(vector<Tello*> tellos) {
     _tellos = std::move(tellos);
 }
 
-vector<Tello*> BaseSettings::tellos() const {
+vector<Tello*>& BaseSettings::tellos() {
     return _tellos;
 }

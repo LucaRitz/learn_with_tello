@@ -11,10 +11,12 @@ public:
 
 class KeyboardView : public Fl_Group {
 public:
-    explicit KeyboardView(IListener& listener);
+    KeyboardView();
+
+    void setListener(IListener* listener);
 
 private:
-    IListener& _listener;
+    IListener* _listener;
     Fl_Button _aButton;
     Fl_Box _aBox;
 };
