@@ -1,11 +1,11 @@
 include(FetchContent)
 
-set(OPTION_BUILD_SHARED_LIBS ON CACHE INTERNAL "")  # Forces the value
+set(TELLO_BUILD_SHARED_LIBS ON CACHE INTERNAL "")  # Forces the value
 FetchContent_Declare(
         tello
         GIT_REPOSITORY https://github.com/LucaRitz/tello.git
-        GIT_TAG        origin/shared-build
+        GIT_TAG        1.0.1
 )
 
 FetchContent_MakeAvailable(tello)
-unset(OPTION_BUILD_SHARED_LIBS)
+unset(TELLO_BUILD_SHARED_LIBS)
