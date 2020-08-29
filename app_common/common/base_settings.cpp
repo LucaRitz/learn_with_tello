@@ -7,3 +7,7 @@ void BaseSettings::setTellos(vector<Tello*> tellos) {
 vector<Tello*>& BaseSettings::tellos() {
     return _tellos;
 }
+
+const vector<Tello*>& BaseSettings::tellos() const {
+    return _tellos;
+}

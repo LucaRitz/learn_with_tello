@@ -10,6 +10,7 @@ MainController::MainController(MainView* view, vector<IApplication*>& modules) :
     _settingsDialogController(&_settingsDialogView, &_dependencyMatrix) {
     _view->setListener(this);
     _view->setModules(modules);
+    _dependencyMatrix.updateModules();
 }
 
 void MainController::onSettingsPressed() {

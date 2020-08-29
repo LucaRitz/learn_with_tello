@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <common/application.hpp>
+#include <common/settings_controller.hpp>
 
 ModuleDependencyMatrix::ModuleDependencyMatrix(vector<IApplication*>& modules) :
     _dependentModules(),
@@ -21,6 +22,15 @@ ModuleDependencyMatrix::ModuleDependencyMatrix(vector<IApplication*>& modules) :
 
         if (module->settingsController()) {
             _settingsController.push_back(module);
+        }
+    }
+}
+
+void ModuleDependencyMatrix::updateModules() {
+    for (auto* module : modulesWithSettingsController()) {
+        const auto* settings = module->settingsController()->settings();
+        for (auto* dependent : getDependents(module->id())) {
+            dependent->update(module->id(), settings);
         }
     }
 }

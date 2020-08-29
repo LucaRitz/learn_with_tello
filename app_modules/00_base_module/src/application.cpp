@@ -1,12 +1,12 @@
 #include "application.hpp"
 
 #include <tello/logger/logger.hpp>
-#include <tello/connection/network.hpp>
+#include <tello/connection/tello_network.hpp>
 #include <common/base_settings.hpp>
 
 using tello::LoggerSettings;
 using tello::Logger;
-using tello::Network;
+using tello::TelloNetwork;
 using tello::Tello;
 
 Application::Application() :
@@ -30,21 +30,21 @@ uint8_t Application::init() {
     LoggerSettings settings{"./log/command_log.log", "./log/video_log.log", "./log/status_log.log"};
     Logger::initialize(settings);
 
-    const bool isConnected = Network::connect();
+    const bool isConnected = TelloNetwork::connect();
     short returnCode = isConnected ? 0 : 1;
 
     return returnCode;
 }
 
 void Application::tearDown() {
-    Network::disconnect();
+    TelloNetwork::disconnect();
 }
 
 bool Application::isRunning() {
     return false;
 }
 
-void Application::update(ModuleId moduleId, ISettings* settings) {
+void Application::update(ModuleId moduleId, const ISettings* settings) {
     // NOOP
 }
 

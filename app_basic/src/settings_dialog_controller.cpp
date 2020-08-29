@@ -12,12 +12,12 @@ SettingsDialogController::SettingsDialogController(SettingsDialogView* view, Mod
 }
 
 void SettingsDialogController::onSave() {
-    for (auto* module : _dependencyMatrix->modulesWithSettingsController()) {
-        auto* settings = module->settingsController()->save();
-        for (auto* dependent : _dependencyMatrix->getDependents(module->id())) {
-            dependent->update(module->id(), settings);
-        }
+    for(auto* module : _dependencyMatrix->modulesWithSettingsController()) {
+        module->settingsController()->save();
     }
+
+    _dependencyMatrix->updateModules();
+
     _view->hide();
 }
 

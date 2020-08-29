@@ -11,6 +11,7 @@ class BaseSettings : public ISettings {
 public:
     void setTellos(vector<Tello*> tellos);
     [[nodiscard]] vector<Tello*>& tellos();
+    [[nodiscard]] const vector<Tello*>& tellos() const;
 
 private:
     vector<Tello*> _tellos;

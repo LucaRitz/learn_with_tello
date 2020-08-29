@@ -17,11 +17,14 @@ Fl_Group* SettingsController::getView() {
     return _view;
 }
 
-ISettings * SettingsController::save() {
+void SettingsController::save() {
     _view->save(_baseSettings);
-    return _baseSettings.get();
 }
 
 void SettingsController::updateView() {
     _view->show(_baseSettings);
+}
+
+ISettings* SettingsController::settings() const {
+    return _baseSettings.get();
 }

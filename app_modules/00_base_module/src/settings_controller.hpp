@@ -11,8 +11,9 @@ public:
     explicit SettingsController(SettingsView* view, std::shared_ptr<BaseSettings> settings);
 
     [[nodiscard]] Fl_Group* getView() override;
-    ISettings* save() override;
+    void save() override;
     void updateView() override;
+    [[nodiscard]] ISettings* settings() const override;
 
 private:
     SettingsView* _view;

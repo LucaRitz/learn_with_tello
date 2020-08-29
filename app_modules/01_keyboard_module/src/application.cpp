@@ -37,11 +37,29 @@ bool Application::isRunning() {
     return false;
 }
 
-void Application::update(ModuleId moduleId, ISettings* settings) {
+#include <iostream>
+void Application::update(ModuleId moduleId, const ISettings* settings) {
     switch (moduleId) {
-        case ModuleId::BASE:
+        case ModuleId::BASE: {
             _baseSettings = dynamic_cast<const BaseSettings*>(settings);
+            _baseSettings->tellos().at(0)->setStatusHandler([](const StatusResponse& resp) {
+                std::cout << "Status information: " << std::to_string(resp.get_agx()) << std::endl;
+            });
+            std::cout << "Update settings in module 1: " << _baseSettings->tellos().at(0)->ip() << std::endl;
+
+            auto& tello = _baseSettings->tellos().at(0);
+
+            future<Response> command_future = tello->command();
+            command_future.wait();
+
+            future<Response> takeoff_future = tello->takeoff();
+            takeoff_future.wait();
+
+            future<Response> land_future = tello->land();
+            land_future.wait();
+
             break;
+        }
         default:
             break;
     }

@@ -13,6 +13,7 @@ class ModuleDependencyMatrix {
 public:
     explicit ModuleDependencyMatrix(vector<IApplication*>& modules);
 
+    void updateModules();
     vector<IApplication*> getDependents(ModuleId moduleId);
     vector<IApplication*> modules();
     vector<IApplication*> modulesWithSettingsController();
