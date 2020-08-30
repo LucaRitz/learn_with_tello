@@ -14,6 +14,7 @@ enum class MenuItemIndex {
 };
 
 void onSettingsPressed(Fl_Widget* widget, void* listener);
+void onTabChanged(Fl_Widget *widget, void* listener);
 
 MainView::MainView() : Fl_Group(20, 30, 1280, 720),
     _listener(nullptr),
@@ -34,18 +35,27 @@ MainView::~MainView() {
 
 void MainView::setModules(vector<IApplication*>& modules) {
     _tabs.clear();
-    TabLoader::createTabs(_tabs, modules, [](auto* appli) { return appli->getView(); });
+    TabLoader::createTabs(_tabs, modules, [](auto* appli) { return appli->controller() != nullptr ? appli->controller()->view() : nullptr; });
 }
 
 void MainView::setListener(mainview::IListener* listener) {
     this->_listener = listener;
     popup[static_cast<int>(MenuItemIndex::SETTINGS)].callback(onSettingsPressed, _listener);
+    _tabs.callback(onTabChanged, _listener);
 }
 
 void MainView::show(int argc, char **argv) {
     _window.show(argc, argv);
 }
 
+Fl_Widget* MainView::activeView() {
+    return _tabs.value();
+}
+
 void onSettingsPressed(Fl_Widget* widget, void* listener) {
     static_cast<mainview::IListener*>(listener)->onSettingsPressed();
+}
+
+void onTabChanged(Fl_Widget *widget, void* listener) {
+    static_cast<mainview::IListener*>(listener)->onTabChanged();
 }

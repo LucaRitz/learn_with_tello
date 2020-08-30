@@ -11,6 +11,6 @@ class IApplication;
 
 class TabLoader {
 public:
-    static void createTabs(Fl_Tabs& tabs, vector<IApplication*>& modules, std::function<Fl_Group*(IApplication*)>&& getView);
+    static void createTabs(Fl_Tabs& tabs, vector<IApplication*>& modules, std::function<Fl_Group*(IApplication*)>&& getController);
     static void clear(Fl_Tabs& tabs);
 };

@@ -2,7 +2,6 @@
 
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
-#include <FL/Fl_Box.H>
 
 class IListener {
 
@@ -15,6 +14,5 @@ public:
     void setListener(IListener* listener);
 private:
     Fl_Button _aButton;
-    Fl_Box _aBox;
     IListener* _listener;
 };

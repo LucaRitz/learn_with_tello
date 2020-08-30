@@ -6,5 +6,6 @@ function(appendCommon TARGET)
             ${CMAKE_SOURCE_DIR}/app_common/common/macro_definition.hpp
             ${CMAKE_SOURCE_DIR}/app_common/common/base_settings.hpp
             ${CMAKE_SOURCE_DIR}/app_common/common/base_settings.cpp
+            ${CMAKE_SOURCE_DIR}/app_common/common/base_controller.hpp
             )
 endfunction()

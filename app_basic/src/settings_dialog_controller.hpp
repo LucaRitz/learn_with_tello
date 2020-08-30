@@ -4,9 +4,17 @@
 
 class ModuleDependencyMatrix;
 
+namespace settings::dialog {
+    class IListener {
+    public:
+        virtual void onClose() = 0;
+    };
+}
+
 class SettingsDialogController : public settings::IListener {
 public:
-    SettingsDialogController(SettingsDialogView* view, ModuleDependencyMatrix* dependencyMatrix);
+    SettingsDialogController(SettingsDialogView* view, ModuleDependencyMatrix* dependencyMatrix,
+                             settings::dialog::IListener* listener);
 
     void onSave() override;
     void onCancel() override;
@@ -15,4 +23,5 @@ public:
 private:
     SettingsDialogView* _view;
     ModuleDependencyMatrix* _dependencyMatrix;
+    settings::dialog::IListener* _listener;
 };

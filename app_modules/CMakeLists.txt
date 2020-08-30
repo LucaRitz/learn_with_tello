@@ -1,2 +1,3 @@
 add_subdirectory(00_base_module)
 add_subdirectory(01_keyboard_module)
+add_subdirectory(02_lukas_module)

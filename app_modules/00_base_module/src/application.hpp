@@ -19,9 +19,8 @@ public:
     [[nodiscard]] vector<ModuleId> dependsOn() const override;
     uint8_t init() override;
     void tearDown() override;
-    bool isRunning() override;
     void update(ModuleId moduleId, const ISettings* settings) override;
-    [[nodiscard]] Fl_Group* getView() const override;
+    [[nodiscard]] BaseController* controller() override;
     ISettingsController* settingsController() override;
 
 private:

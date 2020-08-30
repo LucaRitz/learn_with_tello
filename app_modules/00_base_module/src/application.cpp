@@ -40,15 +40,11 @@ void Application::tearDown() {
     TelloNetwork::disconnect();
 }
 
-bool Application::isRunning() {
-    return false;
-}
-
 void Application::update(ModuleId moduleId, const ISettings* settings) {
     // NOOP
 }
 
-Fl_Group* Application::getView() const {
+BaseController* Application::controller() {
     return nullptr;
 }
 

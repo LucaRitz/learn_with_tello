@@ -38,7 +38,7 @@ void Application::update(ModuleId moduleId, const ISettings* settings) {
     switch (moduleId) {
         case ModuleId::BASE: {
             _baseSettings = dynamic_cast<const BaseSettings*>(settings);
-            std::cout << "Update settings in module 1: " << _baseSettings->tellos().at(0)->ip() << std::endl;
+            std::cout << "Update settings in module 2: " << _baseSettings->tellos().at(0)->ip() << std::endl;
 
            /* auto& tello = _baseSettings->tellos().at(0);
 

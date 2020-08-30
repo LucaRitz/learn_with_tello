@@ -16,6 +16,7 @@ namespace mainview {
         virtual ~IListener() = default;
 
         virtual void onSettingsPressed() = 0;
+        virtual void onTabChanged() = 0;
     };
 }
 
@@ -28,6 +29,8 @@ public:
     void setModules(vector<IApplication*>& modules);
     void setListener(mainview::IListener* listener);
     void show(int argc, char **argv);
+
+    Fl_Widget* activeView();
 
 private:
     mainview::IListener* _listener;
