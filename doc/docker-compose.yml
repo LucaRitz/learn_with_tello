@@ -1,0 +1,11 @@
+version: '3'
+services:
+  documentation_build:
+    build:
+      context: './'
+    # command: tail -f /dev/null
+    volumes:
+      - ./tex:/miktex/work
+      - ./logs:/miktex/.miktex/texmfs/data/miktex/log
+      - ./documentation:/interface/output
+    container_name: learn_with_tello_build_doc

@@ -5,7 +5,8 @@ of C++ (or any other programming language).<br/>
 To complete the tasks, you need the following things:
 - This repository
 - A Ryze Tech Tello EDU drone
-- The exercise-and-solution pdf (included in this repo)
+- The exercise-and-solution pdf (included in this repo)<br>
+It is place at doc/documentation/learn_with_tello.pdf
 
 ## Supported Platforms
 At the moment, the tasks are only available for windows (due the lack of implementation for<br/>

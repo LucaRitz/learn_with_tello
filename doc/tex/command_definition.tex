@@ -1,0 +1,42 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper, 11pt, oneside]{book} % A4 paper size, default 11pt font size and oneside for equal margins
+
+\usepackage[margin=1in,nomarginpar]{geometry}
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{fouriernc} % Use the New Century Schoolbook font
+\usepackage{titletoc}% http://ctan.org/pkg/titletoc
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[postpunc={dot},% full stop after description
+nostyles,% don't load default style packages
+% load glossaries-extra-stylemods.sty and glossary-tree.sty:
+stylemods={tree}
+]{glossaries-extra}
+\usepackage[nottoc, notbib]{tocbibind}
+
+% glossary
+\input{./resources/glossary}
+
+% Table of contents with chapters.
+\titlecontents*{chapter}% <section-type>
+[0pt]% <left>
+{\addvspace{1em}}% <above-code>
+{\bfseries\chaptername\ \thecontentslabel\quad}% <numbered-entry-format>
+{}% <numberless-entry-format>
+{\bfseries\hfill\contentspage}% <filler-page-format>
+
+% Table of contents with links
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
