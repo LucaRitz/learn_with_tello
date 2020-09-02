@@ -14,7 +14,8 @@ other operating systems of the used tello library).<br/>
 
 ### Compilers
 The following compilers are tested and work:
-- nmake
+- MSVC
+- mingw/g++ (use MSYS2)
 
 ## Installation
 
