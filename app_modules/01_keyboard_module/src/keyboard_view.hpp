@@ -14,7 +14,7 @@ public:
 
     void setListener(IListener* listener);
 private:
-    Fl_Button _aButton;
+    Fl_Button _takeOffButton;
     Fl_Box _aBox;
     IListener* _listener;
 };

@@ -13,6 +13,6 @@ public:
 
     void setListener(IListener* listener);
 private:
-    Fl_Button _aButton;
+    Fl_Button _takeOffButton;
     IListener* _listener;
 };

@@ -8,4 +8,9 @@ target_sources(${PROJECT_NAME} PUBLIC
         keyboard_controller.cpp
         keyboard_view.hpp
         keyboard_view.cpp
+        command_thread.hpp
+        command_thread.cpp
+        types.hpp
         )
+
+add_subdirectory(functions)

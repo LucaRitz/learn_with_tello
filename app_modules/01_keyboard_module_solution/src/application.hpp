@@ -5,9 +5,11 @@
 #include <memory>
 
 using std::unique_ptr;
+using std::shared_ptr;
 
 class KeyboardView;
 class KeyboardController;
+class KeyboardSettings;
 
 class Application: public IApplication {
 public:
@@ -22,8 +24,12 @@ public:
     [[nodiscard]] BaseController* controller() override;
     ISettingsController* settingsController() override;
 
+    const BaseSettings* baseSettings();
+    shared_ptr<KeyboardSettings> keyboardSettings();
+
 private:
     const BaseSettings* _baseSettings;
+    shared_ptr<KeyboardSettings> _keyboardSettings;
     const unique_ptr<KeyboardView> _keyboardView;
     const unique_ptr<KeyboardController> _keyboardController;
 };

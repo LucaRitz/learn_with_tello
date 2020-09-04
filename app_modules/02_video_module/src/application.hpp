@@ -22,6 +22,8 @@ public:
     [[nodiscard]] BaseController* controller() override;
     ISettingsController* settingsController() override;
 
+    const BaseSettings* baseSettings();
+
 private:
     const BaseSettings* _baseSettings;
     const unique_ptr<KeyboardView> _keyboardView;

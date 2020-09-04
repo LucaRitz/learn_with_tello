@@ -34,7 +34,7 @@
 cmake-build-debug/
 cmake-build-release/
 doc/logs/*
-doc/documentation/*.aux
-doc/documentation/*.log
-doc/documentation/*.toc
-doc/documentation/*.lof
+doc/**/*.aux
+doc/**/*.log
+doc/**/*.toc
+doc/**/*.lof

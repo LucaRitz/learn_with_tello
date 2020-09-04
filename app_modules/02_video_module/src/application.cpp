@@ -14,11 +14,11 @@ Application::Application() :
 }
 
 ModuleId Application::id() const {
-    return ModuleId::KEYBOARD_MODULE;
+    return ModuleId::VIDEO_MODULE;
 }
 
 string* Application::name() const {
-    return new string {"Keyboard"};
+    return new string {"Video"};
 }
 
 vector<ModuleId> Application::dependsOn() const {
@@ -38,19 +38,7 @@ void Application::update(ModuleId moduleId, const ISettings* settings) {
     switch (moduleId) {
         case ModuleId::BASE: {
             _baseSettings = dynamic_cast<const BaseSettings*>(settings);
-            std::cout << "Update settings in module 2: " << _baseSettings->tellos().at(0)->ip() << std::endl;
-
-           /* auto& tello = _baseSettings->tellos().at(0);
-
-            future<Response> command_future = tello->command();
-            command_future.wait();
-
-            future<Response> takeoff_future = tello->takeoff();
-            takeoff_future.wait();
-
-            future<Response> land_future = tello->land();
-            land_future.wait();*/
-
+            std::cout << "Update settings in module 3: " << _baseSettings->tellos().at(0)->ip() << std::endl;
             break;
         }
         default:
@@ -64,4 +52,8 @@ BaseController* Application::controller() {
 
 ISettingsController* Application::settingsController() {
     return nullptr;
+}
+
+const BaseSettings* Application::baseSettings() {
+    return _baseSettings;
 }

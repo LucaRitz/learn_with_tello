@@ -1,4 +1,4 @@
 add_subdirectory(00_base_module)
 add_subdirectory(01_keyboard_module)
 add_subdirectory(01_keyboard_module_solution)
-add_subdirectory(02_lukas_module)
+add_subdirectory(02_video_module)

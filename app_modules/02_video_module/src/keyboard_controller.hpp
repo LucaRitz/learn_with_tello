@@ -1,6 +1,7 @@
 #pragma once
 
 #include <common/base_controller.hpp>
+#include <common/frame_grabber.hpp>
 
 #include "keyboard_view.hpp"
 
@@ -18,4 +19,5 @@ public:
 private:
     KeyboardView* _view;
     Application* _module;
+    FrameGrabber _frameGrabber;
 };
