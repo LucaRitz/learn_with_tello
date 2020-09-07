@@ -16,7 +16,9 @@ enum class ModuleId {
     BASE,
     KEYBOARD_MODULE,
     KEYBOARD_SOLUTION_MODULE,
-    VIDEO_MODULE
+    VIDEO_MODULE,
+
+    TEMPLATE
 };
 
 class IApplication {
