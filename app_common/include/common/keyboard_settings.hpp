@@ -1,5 +1,7 @@
 #pragma once
 
+#include "settings.hpp"
+
 namespace mathematical {
     class Function {
     public:
@@ -7,7 +9,7 @@ namespace mathematical {
     };
 }
 
-class KeyboardSettings {
+class KeyboardSettings : public ISettings {
 public:
     KeyboardSettings() = default;
 

@@ -6,8 +6,8 @@
 
 using std::unique_ptr;
 
-class KeyboardView;
-class KeyboardController;
+class VideoView;
+class VideoController;
 
 class Application: public IApplication {
 public:
@@ -26,6 +26,6 @@ public:
 
 private:
     const BaseSettings* _baseSettings;
-    const unique_ptr<KeyboardView> _keyboardView;
-    const unique_ptr<KeyboardController> _keyboardController;
+    const unique_ptr<VideoView> _videoView;
+    const unique_ptr<VideoController> _videoController;
 };

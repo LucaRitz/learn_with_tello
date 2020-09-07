@@ -3,21 +3,22 @@
 #include <common/base_controller.hpp>
 #include <common/frame_grabber.hpp>
 
-#include "keyboard_view.hpp"
+#include "video_view.hpp"
 
 class Application;
 
-class KeyboardController : public IListener, public BaseController {
+class VideoController : public IListener, public BaseController {
 public:
-    KeyboardController(KeyboardView* view, Application* module);
+    VideoController(VideoView* view, Application* module);
 
     void activate() override;
     void deactivate() override;
+    void takePicture() override;
 
     Fl_Group* view() override;
 
 private:
-    KeyboardView* _view;
+    VideoView* _view;
     Application* _module;
     FrameGrabber _frameGrabber;
 };

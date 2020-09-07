@@ -4,8 +4,8 @@ target_sources(${PROJECT_NAME} PUBLIC
         PRIVATE
         application.hpp
         application.cpp
-        keyboard_controller.hpp
-        keyboard_controller.cpp
-        keyboard_view.hpp
-        keyboard_view.cpp
+        video_controller.hpp
+        video_controller.cpp
+        video_view.hpp
+        video_view.cpp
         )

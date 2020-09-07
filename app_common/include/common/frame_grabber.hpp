@@ -1,18 +1,21 @@
 #pragma once
 
-#include <opencv2/core.hpp>
 #include <mutex>
 #include <optional>
 #include <future>
 #include <memory>
+#include "H264Decoder.hpp"
 
 namespace tello {
     class Tello;
 }
 
+namespace cv {
+    class Mat;
+}
+
 using tello::Tello;
 using std::mutex;
-using std::optional;
 using std::future;
 using std::shared_ptr;
 using cv::Mat;
@@ -26,7 +29,7 @@ class FrameGrabber {
 public:
     FrameGrabber();
 
-    optional<future<Mat>> grabNext();
+    future<Mat> grabNext();
 
     void tello(Tello* tello);
     void activate();
@@ -36,4 +39,5 @@ private:
     Tello* _tello;
     FrameInfo* _grabFrame;
     mutex _frameMutex;
+    H264Decoder _decoder;
 };

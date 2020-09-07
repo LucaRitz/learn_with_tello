@@ -1,10 +1,12 @@
 #include <common/frame_grabber.hpp>
 
-#include <Decoder.h>
 #include <tello/tello.hpp>
 
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
+#include "opencv2/opencv.hpp"
+
+extern "C" {
+#include <libavcodec/avcodec.h>
+}
 
 FrameGrabber::FrameGrabber() :
     _tello(nullptr),
@@ -12,15 +14,19 @@ FrameGrabber::FrameGrabber() :
     _frameMutex() {
 }
 
-optional<future<cv::Mat>> FrameGrabber::grabNext() {
+future<cv::Mat> FrameGrabber::grabNext() {
     promise<Mat> prom{};
     future<Mat> fut_prom = std::move(prom.get_future());
 
     _frameMutex.lock();
+    if (_grabFrame != nullptr) {
+        _grabFrame->_prom->set_value(Mat{});
+        delete _grabFrame;
+    }
     _grabFrame = new FrameInfo{std::make_shared<promise < Mat>>(std::move(prom))};
     _frameMutex.unlock();
 
-    return std::make_optional<future<Mat>>(std::move(fut_prom));
+    return fut_prom;
 }
 
 void FrameGrabber::tello(Tello* tello) {
@@ -30,62 +36,50 @@ void FrameGrabber::tello(Tello* tello) {
 #include <iostream>
 
 void FrameGrabber::activate() {
-    auto video_resp = _tello->streamon();
-    video_resp.wait();
-
     _tello->setVideoHandler([this](const VideoResponse& response) {
         _frameMutex.lock();
         if (_grabFrame != nullptr) {
+            _decoder.parse(response.videoFrame(), response.length());
+            _decoder.parse(response.videoFrame() + response.length(), 0); // Signal end of file
 
-            Stream s;
+            if (_decoder.is_frame_available()) {
+                try {
+                    const AVFrame& frame = _decoder.decode_frame();
 
-            s.SetStream(response.videoFrame(), response.length());
-            u32 height, width;
-            u8* img_data = nullptr;
-            StreamStatus ret = s.BroadwayDecode();
-            switch (ret) {
-                case PIC_READY:
-                    std::cout << "Get frame" << std::endl;
-                    img_data = s.GetFrame(&width, &height);
-                    break;
+                    if (frame.key_frame) {
+                        cv::Size actual_size(1024, 720);
+                        cv::Size half_size(512, 360);
 
-                case STREAM_ERROR:
-                    std::cout << "Stream error" << std::endl;
-                    break;
-                case STREAM_ENDED:
-                    std::cout << "Stream ended" << std::endl;
-                    //streaming = false;
-                    break;
+                        cv::Mat y(actual_size, CV_8UC1, frame.data[0]);
+                        cv::Mat u(half_size, CV_8UC1, frame.data[1]);
+                        cv::Mat v(half_size, CV_8UC1, frame.data[2]);
 
-                default:
-                    break;
-            }
+                        cv::Mat u_resized, v_resized;
+                        cv::resize(u, u_resized, actual_size, 0, 0, cv::INTER_NEAREST); //repeat u values 4 times
+                        cv::resize(v, v_resized, actual_size, 0, 0, cv::INTER_NEAREST); //repeat v values 4 times
 
-            if (ret == PIC_READY) {
-                std::cout << "Image ready" << std::endl;
-                if(img_data == nullptr) {
-                    std::cout << "Image data is NULL" << std::endl;
-                    //break;
+                        cv::Mat yuv;
+
+                        std::vector<cv::Mat> yuv_channels = { y, u_resized, v_resized };
+                        cv::merge(yuv_channels, yuv);
+
+                        cv::Mat bgr;
+                        cv::cvtColor(yuv, bgr, cv::COLOR_YUV2BGR);
+
+                        _grabFrame->_prom->set_value(bgr);
+                        delete _grabFrame;
+                        _grabFrame = nullptr;
+                    }
+                } catch(...) {
+                    std::cout << "Exception occured" << std::endl;
                 }
-                cv::Mat img_buffer(height+height/2, width, CV_8UC1, (uchar *)img_data);
-                // if you want only grayscale you can directly get only Y. And if you want the
-                // cr and cb channels separated, here you go
-                // cv::Mat Y(height, width, CV_8UC1, (uchar *)img_data);
-                // cv::Mat cb(height/2, width/2, CV_8UC1, (uchar *)(img_data+height*width));
-                // cv::Mat cr(height/2, width/2, CV_8UC1, (uchar *)(img_data+height*width+(height/2)*(width/2)));
-                cv::Mat original;
-                cv::cvtColor(img_buffer, original, cv::COLOR_YUV2RGB_YV12);
-                _grabFrame->_prom->set_value(original);
-            } else {
-                std::cout << "EMPTY" << std::endl;
-                _grabFrame->_prom->set_value(cv::Mat{});
             }
-
-            delete _grabFrame;
-            _grabFrame = nullptr;
         }
         _frameMutex.unlock();
     });
+
+    auto video_resp = _tello->streamon();
+    video_resp.wait();
 }
 
 void FrameGrabber::deactivate() {

@@ -1,16 +1,16 @@
 #include "application.hpp"
 
 #include <tello/tello.hpp>
-#include "keyboard_view.hpp"
-#include "keyboard_controller.hpp"
+#include "video_view.hpp"
+#include "video_controller.hpp"
 
 using tello::Tello;
 using tello::Response;
 
 Application::Application() :
-    _baseSettings(nullptr),
-    _keyboardView(std::make_unique<KeyboardView>()),
-    _keyboardController(std::make_unique<KeyboardController>(_keyboardView.get(), this)){
+        _baseSettings(nullptr),
+        _videoView(std::make_unique<VideoView>()),
+        _videoController(std::make_unique<VideoController>(_videoView.get(), this)){
 }
 
 ModuleId Application::id() const {
@@ -47,7 +47,7 @@ void Application::update(ModuleId moduleId, const ISettings* settings) {
 }
 
 BaseController* Application::controller() {
-    return _keyboardController.get();
+    return _videoController.get();
 }
 
 ISettingsController* Application::settingsController() {

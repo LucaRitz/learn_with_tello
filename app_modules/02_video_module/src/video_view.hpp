@@ -4,15 +4,16 @@
 #include <FL/Fl_Button.H>
 
 class IListener {
-
+public:
+    virtual void takePicture() = 0;
 };
 
-class KeyboardView : public Fl_Group {
+class VideoView : public Fl_Group {
 public:
-    KeyboardView();
+    VideoView();
 
     void setListener(IListener* listener);
 private:
-    Fl_Button _takeOffButton;
+    Fl_Button _takePictureBtn;
     IListener* _listener;
 };
