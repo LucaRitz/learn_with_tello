@@ -1,0 +1,9 @@
+target_sources(${PROJECT_NAME}
+        PRIVATE
+        keyboard_settings.hpp
+        keyboard_settings.cpp
+        settings_controller.hpp
+        settings_controller.cpp
+        settings_view.hpp
+        settings_view.cpp
+        )

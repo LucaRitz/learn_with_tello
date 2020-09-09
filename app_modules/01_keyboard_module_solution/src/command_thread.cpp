@@ -1,6 +1,6 @@
 #include "command_thread.hpp"
 
-#include <common/keyboard_settings.hpp>
+#include "settings/keyboard_settings.hpp"
 #include <tello/tello.hpp>
 
 CommandThread::CommandThread() :

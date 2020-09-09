@@ -27,7 +27,7 @@ void KeyboardView::setListener(IListener *listener) {
 int KeyboardView::handle(int event) {
     std::cout << "handle event" << std::endl;
     _pressedKeys.clear();
-    //int pressedKey = Fl::event_key();
+    int pressedKey = Fl::event_key();
     switch (event) {
         case FL_KEYDOWN:
             std::cout << "Key up" << std::endl;

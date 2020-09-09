@@ -14,3 +14,4 @@ target_sources(${PROJECT_NAME} PUBLIC
         )
 
 add_subdirectory(functions)
+add_subdirectory(settings)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <common/keyboard_settings.hpp>
+#include "../types.hpp"
 
 namespace mathematical {
     class LinearFunction : public Function {

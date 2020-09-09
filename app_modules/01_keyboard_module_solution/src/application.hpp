@@ -10,6 +10,8 @@ using std::shared_ptr;
 class KeyboardView;
 class KeyboardController;
 class KeyboardSettings;
+class SettingsController;
+class SettingsView;
 
 class Application: public IApplication {
 public:
@@ -32,4 +34,6 @@ private:
     shared_ptr<KeyboardSettings> _keyboardSettings;
     const unique_ptr<KeyboardView> _keyboardView;
     const unique_ptr<KeyboardController> _keyboardController;
+    unique_ptr<SettingsView> _settingsView;
+    unique_ptr<SettingsController> _settingsController;
 };

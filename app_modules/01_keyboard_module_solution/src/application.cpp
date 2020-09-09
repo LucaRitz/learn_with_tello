@@ -1,6 +1,8 @@
 #include "application.hpp"
 
-#include <common/keyboard_settings.hpp>
+#include "settings/keyboard_settings.hpp"
+#include "settings/settings_view.hpp"
+#include "settings/settings_controller.hpp"
 #include "keyboard_view.hpp"
 #include "keyboard_controller.hpp"
 #include "functions/linear_function.hpp"
@@ -12,8 +14,9 @@ Application::Application() :
     _baseSettings(nullptr),
     _keyboardSettings(std::make_shared<KeyboardSettings>()),
     _keyboardView(std::make_unique<KeyboardView>()),
-    _keyboardController(std::make_unique<KeyboardController>(_keyboardView.get(), this)){
-    _keyboardSettings->function(new mathematical::LinearFunction());
+    _keyboardController(std::make_unique<KeyboardController>(_keyboardView.get(), this)),
+    _settingsView(std::make_unique<SettingsView>()),
+    _settingsController(std::make_unique<SettingsController>(_settingsView.get(), _keyboardSettings)) {
 }
 
 ModuleId Application::id() const {
@@ -53,7 +56,7 @@ BaseController* Application::controller() {
 }
 
 ISettingsController* Application::settingsController() {
-    return nullptr;
+    return _settingsController.get();
 }
 
 const BaseSettings* Application::baseSettings() {

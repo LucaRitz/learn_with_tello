@@ -1,7 +1,7 @@
 #include "keyboard_controller.hpp"
 
 #include "application.hpp"
-#include <common/keyboard_settings.hpp>
+#include "settings/keyboard_settings.hpp"
 
 KeyboardController::KeyboardController(KeyboardView* view, Application* module) :
     _view(view),
