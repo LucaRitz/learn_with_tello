@@ -40,4 +40,5 @@ private:
     FrameInfo* _grabFrame;
     mutex _frameMutex;
     H264Decoder _decoder;
+    ConverterRGB24 _converter;
 };

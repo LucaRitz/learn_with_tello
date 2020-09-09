@@ -25,7 +25,7 @@ struct AVCodec;
 struct AVCodecParserContext;
 struct SwsContext;
 struct AVPacket;
-
+using ssize_t = int;
 
 class H264Exception : public std::runtime_error
 {
@@ -68,7 +68,7 @@ public:
   of consumed bytes of the input stream. It stops consuming
   bytes at frame boundaries.
     */
-    size_t parse(const unsigned char* in_data, size_t in_size);
+    ssize_t parse(const unsigned char* in_data, ssize_t in_size);
     bool is_frame_available() const;
     const AVFrame& decode_frame();
 };

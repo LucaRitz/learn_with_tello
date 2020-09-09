@@ -17,8 +17,9 @@ extern "C" {
 #define CODEC_FLAG_TRUNCATED AV_CODEC_FLAG_TRUNCATED
 #endif
 
-#include "common/H264Decoder.hpp"
+#include <common/H264decoder.hpp>
 #include <utility>
+#include <iostream>
 
 typedef unsigned char ubyte;
 
@@ -77,13 +78,16 @@ H264Decoder::~H264Decoder()
 #endif
 }
 
-
-size_t H264Decoder::parse(const ubyte* in_data, size_t in_size)
+ssize_t H264Decoder::parse(const ubyte* in_data, ssize_t in_size)
 {
-    auto nread = av_parser_parse2(parser, context, &pkt->data, &pkt->size,
-                                  in_data, in_size,
-                                  0, 0, AV_NOPTS_VALUE);
-    return nread;
+/*    auto* copy = new unsigned char[in_size + AV_INPUT_BUFFER_PADDING_SIZE];
+    memcpy(copy, in_data, in_size);*/
+    pkt->data = const_cast<ubyte*>(in_data);
+    pkt->size = in_size;
+    /*auto nread = av_parser_parse2(parser, context, &pkt->data, &pkt->size,
+                                  copy, in_size,
+                                  0, 0, AV_NOPTS_VALUE);*/
+    return in_size;
 }
 
 
@@ -92,13 +96,13 @@ bool H264Decoder::is_frame_available() const
     return pkt->size > 0;
 }
 
-
 const AVFrame& H264Decoder::decode_frame()
 {
     int got_picture = 0;
     int nread = avcodec_decode_video2(context, frame, &got_picture, pkt);
     if (nread < 0 || got_picture == 0)
         throw H264DecodeFailure("error decoding frame\n");
+
     return *frame;
 }
 
@@ -117,6 +121,7 @@ ConverterRGB24::~ConverterRGB24()
     av_frame_free(&framergb);
 }
 
+
 const AVFrame& ConverterRGB24::convert(const AVFrame &frame, ubyte* out_rgb)
 {
     int w = frame.width;
@@ -127,7 +132,6 @@ const AVFrame& ConverterRGB24::convert(const AVFrame &frame, ubyte* out_rgb)
                                    w, h, (AVPixelFormat)pix_fmt,
                                    w, h, AV_PIX_FMT_BGR24, SWS_BILINEAR,
                                    nullptr, nullptr, nullptr);
-
     if (!context)
         throw H264DecodeFailure("cannot allocate context");
 
@@ -136,7 +140,6 @@ const AVFrame& ConverterRGB24::convert(const AVFrame &frame, ubyte* out_rgb)
     // Do the conversion.
     sws_scale(context, frame.data, frame.linesize, 0, h,
               framergb->data, framergb->linesize);
-
     framergb->width = w;
     framergb->height = h;
     return *framergb;
@@ -151,7 +154,7 @@ fill the buffer we should also use it to determine the required size.
 */
 int ConverterRGB24::predict_size(int w, int h)
 {
-    return avpicture_fill((AVPicture*)framergb, nullptr, PIX_FMT_RGB24, w, h);
+    return avpicture_fill((AVPicture*)framergb, nullptr, AV_PIX_FMT_BGR24, w, h);
 }
 
 

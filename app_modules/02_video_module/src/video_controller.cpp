@@ -23,10 +23,15 @@ void VideoController::deactivate() {
 void VideoController::takePicture() {
     _frameGrabber.activate();
 
-    auto image = _frameGrabber.grabNext();
-    Mat matIm = image.get();
-    cv::imshow("Image", matIm);
-    cv::waitKey(0);
+    while(true) {
+        auto image = _frameGrabber.grabNext();
+        Mat matIm = image.get();
+        cv::imshow("Image", matIm);
+        int key = cv::waitKey(1);
+        if (27 /* ESC */ == key) {
+            break;
+        }
+    }
 }
 
 Fl_Group* VideoController::view() {
