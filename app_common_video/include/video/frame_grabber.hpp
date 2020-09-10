@@ -1,10 +1,8 @@
 #pragma once
 
-#include <mutex>
-#include <optional>
 #include <future>
 #include <memory>
-#include "H264Decoder.hpp"
+#include <common/macro_definition.hpp>
 
 namespace tello {
     class Tello;
@@ -14,6 +12,8 @@ namespace cv {
     class Mat;
 }
 
+class FrameGrabberInternal;
+
 using tello::Tello;
 using std::mutex;
 using std::future;
@@ -21,13 +21,10 @@ using std::shared_ptr;
 using cv::Mat;
 using std::promise;
 
-struct FrameInfo {
-    shared_ptr<promise<Mat>> _prom;
-};
-
-class FrameGrabber {
+class EXPORT FrameGrabber {
 public:
     FrameGrabber();
+    ~FrameGrabber();
 
     future<Mat> grabNext();
 
@@ -36,9 +33,5 @@ public:
     void deactivate();
 
 private:
-    Tello* _tello;
-    FrameInfo* _grabFrame;
-    mutex _frameMutex;
-    H264Decoder _decoder;
-    ConverterRGB24 _converter;
+    std::unique_ptr<FrameGrabberInternal> _ptr;
 };

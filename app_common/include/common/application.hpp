@@ -17,6 +17,7 @@ enum class ModuleId {
     KEYBOARD_MODULE,
     KEYBOARD_SOLUTION_MODULE,
     VIDEO_MODULE,
+    VIDEO_TEST_MODULE,
 
     TEMPLATE
 };

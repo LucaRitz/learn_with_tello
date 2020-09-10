@@ -1,23 +1,22 @@
-#include <common/frame_grabber.hpp>
+#include "frame_grabber_internal.hpp"
 
 #include <tello/tello.hpp>
-
 #include "opencv2/opencv.hpp"
 
 extern "C" {
 #include <libavcodec/avcodec.h>
 }
 
-FrameGrabber::FrameGrabber() :
-    _tello(nullptr),
-    _grabFrame(),
-    _frameMutex(),
-    _decoder(),
-    _converter() {
+FrameGrabberInternal::FrameGrabberInternal() :
+        _tello(nullptr),
+        _grabFrame(),
+        _frameMutex(),
+        _decoder(),
+        _converter() {
     disable_logging();
 }
 
-future<cv::Mat> FrameGrabber::grabNext() {
+future<cv::Mat> FrameGrabberInternal::grabNext() {
     promise<Mat> prom{};
     future<Mat> fut_prom = std::move(prom.get_future());
 
@@ -32,11 +31,11 @@ future<cv::Mat> FrameGrabber::grabNext() {
     return fut_prom;
 }
 
-void FrameGrabber::tello(Tello* tello) {
+void FrameGrabberInternal::tello(Tello* tello) {
     this->_tello = tello;
 }
 
-void FrameGrabber::activate() {
+void FrameGrabberInternal::activate() {
     _tello->setVideoHandler([this](const VideoResponse& response) {
         _decoder.parse(response.videoFrame(), response.length());
         if (_decoder.is_frame_available()) {
@@ -67,7 +66,7 @@ void FrameGrabber::activate() {
     video_resp.wait();
 }
 
-void FrameGrabber::deactivate() {
+void FrameGrabberInternal::deactivate() {
     if (_tello) {
         auto video_off_resp = _tello->streamoff();
         video_off_resp.wait();

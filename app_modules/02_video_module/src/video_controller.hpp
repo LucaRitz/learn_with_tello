@@ -1,7 +1,7 @@
 #pragma once
 
 #include <common/base_controller.hpp>
-#include <common/frame_grabber.hpp>
+#include <video/frame_grabber.hpp>
 
 #include "video_view.hpp"
 
