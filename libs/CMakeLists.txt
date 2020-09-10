@@ -1,4 +1,7 @@
+include(glad.cmake)
 include(ffmpeg/ffmpeg.cmake)
 include(tello.cmake)
 include(fltk.cmake)
-include(opencv.cmake)
+add_subdirectory(opencv)
+add_subdirectory(opengl)
+add_subdirectory(stb)
