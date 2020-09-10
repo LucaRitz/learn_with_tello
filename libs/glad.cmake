@@ -5,5 +5,3 @@ FetchContent_Declare(
         GIT_TAG        v0.1.33
 )
 FetchContent_MakeAvailable(glad)
-
-message("GLAD_INCLUDE_DIRS : ${GLAD_INCLUDE_DIRS}")

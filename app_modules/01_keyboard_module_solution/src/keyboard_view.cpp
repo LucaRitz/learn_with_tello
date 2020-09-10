@@ -8,6 +8,7 @@ KeyboardView::KeyboardView() :
         Fl_Group(20, 55, 1280, 720, "Keyboard - Solution"),
         _takeOffButton(25, 65, 100, 30, "Take off or land"),
         _aBox(25, 105, 300, 200, "Label"),
+        _videoWidget(320, 65, 960, 720),
         _listener(nullptr) {
 
     _aBox.box(FL_UP_BOX);

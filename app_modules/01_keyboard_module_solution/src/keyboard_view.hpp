@@ -3,6 +3,7 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
+#include "tello_video_widget.hpp"
 
 #include "types.hpp"
 
@@ -22,6 +23,7 @@ public:
 private:
     Fl_Button _takeOffButton;
     Fl_Box _aBox;
+    TelloVideoWidget _videoWidget;
     IListener* _listener;
     vector<command::Key> _pressedKeys;
 };

@@ -1,11 +1,8 @@
-#include <stdarg.h>
+#include <cstdarg>
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
-#include <FL/Fl_Gl_Window.H>
-#include <FL/Fl_Light_Button.H>
-#include <FL/Fl_Text_Display.H>
-#include <FL/Fl_Text_Buffer.H>
 #include <glad/glad.h>
+#include <FL/gl.h>
 #include "image.h"
 #include "shader.h"
 #include "texture.h"
@@ -32,7 +29,7 @@ public:
             texture1(),
             shader("./resources/shader.vs", "./resources/shader.fs") {
 
-        mode(FL_RGB8 | FL_DOUBLE | FL_OPENGL3);
+        //mode(FL_RGB8 | FL_DOUBLE | FL_OPENGL3);
 
 //        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 //            std::cerr << "Failed to initialize GLAD" << std::endl;
@@ -108,10 +105,10 @@ public:
 
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
-        gl_end();
+        gl_finish();
     }
 
-    virtual int handle(int event) {
+/*    virtual int handle(int event) {
 
 //        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 //            glfwSetWindowShouldClose(window, true);
@@ -160,8 +157,8 @@ public:
 //            return 1;
 //        }
         return Fl_Gl_Window::handle(event);
-    }
-    void reset(void) { shaderProgram = 0; }
+    }*/
+    /*void reset(void) { shaderProgram = 0; }*/
 };
 
 

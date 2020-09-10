@@ -1,6 +1,6 @@
 project(00_base_module)
 
-add_library(${PROJECT_NAME} SHARED)
+add_library(${PROJECT_NAME} MODULE)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${FLTK_INCLUDE_DIR})
 

@@ -1,6 +1,6 @@
 project(02_video_module)
 
-add_library(${PROJECT_NAME} SHARED)
+add_library(${PROJECT_NAME} MODULE)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS} ${FLTK_INCLUDE_DIR})
 

@@ -1,6 +1,5 @@
 #pragma once
 #include <glad/glad.h>
-#include <engine/types.h>
 
 enum class AttributeType : unsigned short {
 	// TODO: keep or remove?
@@ -28,7 +27,7 @@ enum class AttributeType : unsigned short {
 	FIXED
 };
 
-enum class Normalization : unsigned byte {
+enum class Normalization : unsigned char {
 	ON,
 	OFF
 };
