@@ -10,8 +10,9 @@ find_package(fltk REQUIRED)
 add_definitions(-DFL_DLL)
 
 set(BUILD_SHARED_LIBS ON)
-set(OpenCV_DIR ${CMAKE_BINARY_DIR}/libs/opencv/x64/vc16/lib)
-find_package(OpenCV REQUIRED CONFIG)
+find_package(OpenCV REQUIRED CONFIG
+        PATHS ${CMAKE_BINARY_DIR}/libs/opencv)
+unset(BUILD_SHARED_LIBS)
 
 # Applications
 add_subdirectory(app_basic)
