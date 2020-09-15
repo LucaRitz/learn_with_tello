@@ -9,7 +9,7 @@ if (CURRENT_FILES)
 endif ()
 
 # Copy fltk libs
-file(GLOB LIBRARY_FILES ${CMAKE_BINARY_DIR}/../libs/fltk/bin/*.${DYNAMIC_LIB_FILE_ENDING})
+file(GLOB LIBRARY_FILES ${CMAKE_BINARY_DIR}/../_deps/fltk-build/lib/*.${DYNAMIC_LIB_FILE_ENDING})
 file(COPY ${LIBRARY_FILES} DESTINATION ${CMAKE_BINARY_DIR})
 
 # Copy tello libs
