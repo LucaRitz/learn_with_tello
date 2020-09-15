@@ -6,8 +6,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
 # Add libs
 add_subdirectory(libs)
-find_package(fltk REQUIRED)
-add_definitions(-DFL_DLL)
 
 set(BUILD_SHARED_LIBS ON)
 find_package(OpenCV REQUIRED CONFIG

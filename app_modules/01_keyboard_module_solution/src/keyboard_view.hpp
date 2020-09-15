@@ -22,7 +22,6 @@ public:
 
 private:
     Fl_Button _takeOffButton;
-    Fl_Box _aBox;
     TelloVideoWidget _videoWidget;
     IListener* _listener;
     vector<command::Key> _pressedKeys;

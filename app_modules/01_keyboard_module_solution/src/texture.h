@@ -11,6 +11,10 @@ public:
 		return Texture{};
 	}
 
+	static inline Texture* ofHeap() {
+	    return new Texture{};
+	}
+
 	inline Texture() {
 		glGenTextures(1, &ID);
 	}

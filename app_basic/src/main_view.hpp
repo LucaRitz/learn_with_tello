@@ -21,20 +21,18 @@ namespace mainview {
 }
 
 #include <iostream>
-class MainView : public Fl_Group {
+class MainView : public Fl_Window {
 public:
     MainView();
     ~MainView() override;
 
     void setModules(vector<IApplication*>& modules);
     void setListener(mainview::IListener* listener);
-    void show(int argc, char **argv);
 
     Fl_Widget* activeView();
 
 private:
     mainview::IListener* _listener;
-    Fl_Window _window;
     Fl_Tabs _tabs;
     Fl_Menu_Bar _menuBar;
 };

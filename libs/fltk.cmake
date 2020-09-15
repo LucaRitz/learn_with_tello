@@ -1,15 +1,24 @@
-include(${CMAKE_SOURCE_DIR}/cmake/build_external_project.cmake)
+include(FetchContent)
+set(OPTION_BUILD_PDF_DOCUMENTATION OFF CACHE INTERNAL "")
+set(OPTION_BUILD_SHARED_LIBS ON CACHE INTERNAL "")
+set(OPTION_USE_SYSTEM_ZLIB ON CACHE INTERNAL "")
+set(OPTION_USE_SYSTEM_LIBPNG ON CACHE INTERNAL "")
+set(OPTION_USE_SYSTEM_LIBJPEG ON CACHE INTERNAL "")
+set(FLTK_BUILD_TEST OFF CACHE INTERNAL "")
 
-build_external_project(
+FetchContent_Declare(
         fltk
-        ${CMAKE_CURRENT_BINARY_DIR}/external
-        https://github.com/fltk/fltk
-        release-1.3.4-2
-        -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/fltk
-        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -DOPTION_BUILD_PDF_DOCUMENTATION=OFF
-        -DOPTION_BUILD_SHARED_LIBS=TRUE
-        -DOPTION_USE_SYSTEM_ZLIB=TRUE
-        -DOPTION_USE_SYSTEM_LIBPNG=TRUE
-        -DOPTION_USE_SYSTEM_LIBJPEG=TRUE
+        GIT_REPOSITORY https://github.com/fltk/fltk
+        GIT_TAG        e2a249fca99ab91e1bc472e3379c5bcad715221f
 )
+FetchContent_MakeAvailable(fltk)
+unset(OPTION_BUILD_PDF_DOCUMENTATION)
+unset(OPTION_BUILD_SHARED_LIBS)
+unset(OPTION_USE_SYSTEM_ZLIB)
+unset(OPTION_USE_SYSTEM_LIBPNG)
+unset(OPTION_USE_SYSTEM_LIBJPEG)
+unset(FLTK_BUILD_TEST)
+
+target_compile_definitions(fltk_SHARED PUBLIC -DFL_DLL)
+set(FLTK_LIBS fltk_SHARED CACHE INTERNAL "")
+set(FLTK_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/_deps/fltk-src/ ${CMAKE_BINARY_DIR}/_deps/fltk-build/ CACHE INTERNAL "")

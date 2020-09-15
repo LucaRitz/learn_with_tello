@@ -5,16 +5,11 @@
 static void takeOffButtonPressed(Fl_Widget* widget, void* listener);
 
 KeyboardView::KeyboardView() :
-        Fl_Group(20, 55, 1280, 720, "Keyboard - Solution"),
+        Fl_Group(20, 55, 1280, 900, "Keyboard - Solution"),
         _takeOffButton(25, 65, 100, 30, "Take off or land"),
-        _aBox(25, 105, 300, 200, "Label"),
-        _videoWidget(320, 65, 960, 720),
+        _videoWidget(200, 65, 960, 720),
         _listener(nullptr) {
-
-    _aBox.box(FL_UP_BOX);
-    _aBox.labelfont(FL_BOLD+FL_ITALIC);
-    _aBox.labelsize(36);
-    _aBox.labeltype(FL_SHADOW_LABEL);
+    _videoWidget.resizable(_videoWidget);
     end();
 }
 
