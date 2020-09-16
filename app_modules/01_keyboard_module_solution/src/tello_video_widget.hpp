@@ -3,24 +3,21 @@
 #include <glad/glad.H>
 #include <FL/Fl_Gl_Window.H>
 #include "image.h"
-/*#include "shader.h"
+#include "shader.h"
 #include "texture.h"
 #include "vertexbuffer.h"
-#include "vertexarray.h"*/
+#include "vertexarray.h"
 #include <opencv2/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 
-void add_output(const char *format, ...);
-
-
 class TelloVideoWidget : public Fl_Gl_Window {
 
     int gl_version_major;
-  /*  Texture* texture1;
+    Texture* texture1;
     Shader* shader;
     VertexBuffer* vbo;
-    VertexArray* vao;*/
+    VertexArray* vao;
     cv::VideoCapture capture;
 
 public:
@@ -28,17 +25,15 @@ public:
         mode(FL_RGB | FL_DOUBLE | FL_OPENGL3);
     }
 
-    /*void init() {
-        //mode(FL_RGB8 | FL_DOUBLE | FL_OPENGL3);
+    void setUp() {
+        if (!gladLoadGL()) {
+            std::cerr << "Failed to initialize OpenGL context" << std::endl;
+        }
 
-//        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-//            std::cerr << "Failed to initialize GLAD" << std::endl;
-//            exit(-1);
-//        }
+        gl_version_major = 3;
+        shader = new Shader("./scripts/01/shader.vs", "./scripts/01/shader.fs");
 
-        gl_version_major = 0;
-
-        Image containerImage = Image::of("resources/container.jpg");
+        Image containerImage = Image::of("./resources/01/container.jpg");
         texture1 = &Texture::ofHeap()
                 ->activeTexture(0)
                 .bind()
@@ -48,7 +43,6 @@ public:
                 .generateMipmap();
         containerImage.free();
 
-        shader = new Shader("./resources/shader.vs", "./resources/shader.fs");
         shader->use();
         shader->setInt("texture1", 0);
 
@@ -77,28 +71,19 @@ public:
         if (!capture.isOpened()) {
             std::cout << "ERROR: Failed to open video capture" << std::endl;
         }
-    }*/
+    }
 
     void draw() override {
         static bool first = true;
         if (first) {
-            if (!gladLoadGL()) {
-                std::cerr << "Failed to initialize OpenGL context" << std::endl;
-            }
-            glViewport(0, 0, 10, 10);
             first = false;
+            setUp();
         }
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glLoadIdentity();
-        glFlush();
-/*
-        if (!started) {
-            std::cout << "Init" << std::endl;
-            init();
-            started = true;
+        if (!valid()) {
+            glViewport(0, 0, pixel_w(), pixel_h());
         }
+
         if (gl_version_major < 3) return;
 
         cv::Mat frame;
@@ -124,6 +109,5 @@ public:
 
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
-        gl_finish();*/
     }
 };

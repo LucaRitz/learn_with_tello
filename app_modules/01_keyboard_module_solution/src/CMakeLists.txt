@@ -24,6 +24,3 @@ target_sources(${PROJECT_NAME} PUBLIC
 
 add_subdirectory(functions)
 add_subdirectory(settings)
-
-configure_file(shader.vs        resources/shader.vs         COPYONLY)
-configure_file(shader.fs        resources/shader.fs         COPYONLY)
