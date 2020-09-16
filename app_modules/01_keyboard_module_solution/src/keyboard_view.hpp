@@ -3,7 +3,7 @@
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
-#include "tello_video_widget.hpp"
+#include <video/opencv_widget.hpp>
 
 #include "types.hpp"
 
@@ -18,11 +18,13 @@ public:
     KeyboardView();
 
     void setListener(IListener* listener);
-    int handle(int event);
+    int handle(int event) override;
+
+    void picture(cv::Mat& picture);
 
 private:
     Fl_Button _takeOffButton;
-    TelloVideoWidget _videoWidget;
+    OpencvWidget _videoWidget;
     IListener* _listener;
     vector<command::Key> _pressedKeys;
 };

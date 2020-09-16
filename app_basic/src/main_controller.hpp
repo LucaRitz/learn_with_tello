@@ -11,7 +11,6 @@ public:
 
     void onSettingsPressed() override;
     void onTabChanged() override;
-    void show(int argc, char **argv);
     void onClose() override;
 
 private:

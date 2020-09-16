@@ -6,9 +6,15 @@
 KeyboardController::KeyboardController(KeyboardView* view, Application* module) :
     _view(view),
     _module(module),
-    _commandThread(),
-    _isFlying(false) {
+    _workUiExecutor(),
+    _workExecutor(),
+    _commandWorker(),
+    _videoWorker(*this),
+    _isFlying(false),
+    _takeoffWorker(_module, _isFlying) {
     _view->setListener(this);
+    _workExecutor.append(_commandWorker);
+    _workUiExecutor.append(_videoWorker);
 }
 
 #include <iostream>
@@ -16,13 +22,17 @@ KeyboardController::KeyboardController(KeyboardView* view, Application* module) 
 void KeyboardController::activate() {
     future<tello::Response> command_response = _module->baseSettings()->tellos().at(0)->command();
     command_response.wait();
-    _commandThread.tello(_module->baseSettings()->tellos().at(0));
-    _commandThread.mappingFunction(_module->keyboardSettings()->function());
-    _commandThread.play();
+    _commandWorker.tello(_module->baseSettings()->tellos().at(0));
+    _commandWorker.mappingFunction(_module->keyboardSettings()->function());
+    _videoWorker.tello(_module->baseSettings()->tellos().at(0));
+
+    _workUiExecutor.play();
+    _workExecutor.play();
 }
 
 void KeyboardController::deactivate() {
-    _commandThread.pause();
+    _workUiExecutor.pause();
+    _workExecutor.pause();
     if (_isFlying) {
         std::future<tello::Response> landResponse = _module->baseSettings()->tellos().at(0)->land();
         landResponse.wait();
@@ -33,25 +43,17 @@ void KeyboardController::deactivate() {
 }
 
 void KeyboardController::keyPressed(const vector<command::Key>& pressedKeys) {
-    _commandThread.activeKeys(pressedKeys);
+    _commandWorker.activeKeys(pressedKeys);
 }
 
 void KeyboardController::takeOffOrLand() {
-    if (!_isFlying) {
-        std::cout << "Take off" << std::endl;
-        std::future<tello::Response> takeOffResponse = _module->baseSettings()->tellos().at(0)->takeoff();
-        takeOffResponse.wait();
-        if (tello::Status::OK == takeOffResponse.get().status()) {
-            _isFlying = true;
-        }
-        std::cout << "Taken off" << std::endl;
-    } else {
-        std::future<tello::Response> landResponse = _module->baseSettings()->tellos().at(0)->land();
-        landResponse.wait();
-        if (tello::Status::OK == landResponse.get().status()) {
-            _isFlying = false;
-        }
+    if (!_takeoffWorker.attached()) {
+        _workExecutor.append(_takeoffWorker, true);
     }
+}
+
+void KeyboardController::picture(cv::Mat& picture) {
+    _view->picture(picture);
 }
 
 Fl_Group* KeyboardController::view() {

@@ -21,7 +21,6 @@ void KeyboardView::setListener(IListener *listener) {
 #include <iostream>
 
 int KeyboardView::handle(int event) {
-    std::cout << "handle event" << std::endl;
     _pressedKeys.clear();
     int pressedKey = Fl::event_key();
     switch (event) {
@@ -34,6 +33,10 @@ int KeyboardView::handle(int event) {
     }
     _listener->keyPressed(_pressedKeys);
     return Fl_Group::handle(event);
+}
+
+void KeyboardView::picture(cv::Mat& picture) {
+    _videoWidget.frame(picture);
 }
 
 void takeOffButtonPressed(Fl_Widget* widget, void* listener) {

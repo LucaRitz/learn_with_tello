@@ -9,6 +9,7 @@ MainController::MainController(MainView* view, vector<IApplication*>& modules) :
     _settingsDialogController(&_settingsDialogView, &_dependencyMatrix, this) {
     _view->setListener(this);
     _view->setModules(modules);
+    _view->show();
     _dependencyMatrix.updateModules();
     activateCurrentView();
 }
@@ -30,10 +31,6 @@ void MainController::onTabChanged() {
         }
     }
     activateCurrentView();
-}
-
-void MainController::show(int argc, char **argv) {
-    _view->show(argc, argv);
 }
 
 void MainController::onClose() {
