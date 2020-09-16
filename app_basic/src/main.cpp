@@ -15,10 +15,10 @@ int main(int argc, char **argv) {
         }
     }
 
+    Fl::lock();
+
     MainView mainView;
     MainController mainController {&mainView, modules};
-
-    mainController.show(argc, argv);
 
     int returnCode = Fl::run();
 
