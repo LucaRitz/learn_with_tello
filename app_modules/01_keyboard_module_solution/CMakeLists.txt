@@ -1,6 +1,11 @@
 project(01_keyboard_module_solution)
 
-add_library(${PROJECT_NAME} MODULE)
+add_library(${PROJECT_NAME} SHARED)
+set_target_properties( ${PROJECT_NAME}
+        PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY "${MODULE_LIB_DIR}"
+        RUNTIME_OUTPUT_DIRECTORY "${MODULE_LIB_DIR}"
+        )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS} ${FLTK_INCLUDE_DIRS})
 

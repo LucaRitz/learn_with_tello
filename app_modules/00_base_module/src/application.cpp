@@ -1,11 +1,11 @@
 #include "application.hpp"
 
-#include <tello/logger/logger.hpp>
+#include <tello/logger/logger_interface.hpp>
 #include <tello/connection/tello_network.hpp>
 #include <common/base_settings.hpp>
 
 using tello::LoggerSettings;
-using tello::Logger;
+using tello::LoggerInterface;
 using tello::TelloNetwork;
 using tello::Tello;
 
@@ -28,7 +28,7 @@ vector<ModuleId> Application::dependsOn() const {
 
 uint8_t Application::init() {
     LoggerSettings settings{"./log/command_log.log", "./log/video_log.log", "./log/status_log.log"};
-    Logger::initialize(settings);
+    LoggerInterface::initialize(settings);
 
     const bool isConnected = TelloNetwork::connect();
     short returnCode = isConnected ? 0 : 1;

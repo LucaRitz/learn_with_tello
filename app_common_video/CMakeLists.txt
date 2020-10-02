@@ -1,6 +1,11 @@
 project(app_common_video)
 
 add_library(${PROJECT_NAME} SHARED)
+set_target_properties( ${PROJECT_NAME}
+        PROPERTIES
+        LIBRARY_OUTPUT_DIRECTORY "${RUNTIME_CONTEXT}"
+        RUNTIME_OUTPUT_DIRECTORY "${RUNTIME_CONTEXT}"
+        )
 set(VIDEO_COMMON_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_include_directories(${PROJECT_NAME}

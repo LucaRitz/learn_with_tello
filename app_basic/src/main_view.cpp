@@ -16,10 +16,10 @@ enum class MenuItemIndex {
 void onSettingsPressed(Fl_Widget* widget, void* listener);
 void onTabChanged(Fl_Widget *widget, void* listener);
 
-MainView::MainView() : Fl_Window(20, 30, 1280, 900, "Learn with tello"),
+MainView::MainView() : Fl_Window(0, 0, 1280, 990, "Learn with tello"),
     _listener(nullptr),
-    _tabs(10, 40, 1280, 900),
-    _menuBar(0, 0, 1280, 30) {
+    _menuBar(0, 0, 1280, 30),
+    _tabs(10, 40, 1280, 900) {
     resizable(_tabs);
     _menuBar.menu(popup);
     add(_menuBar);
