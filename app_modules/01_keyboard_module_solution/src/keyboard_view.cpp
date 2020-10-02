@@ -5,9 +5,9 @@
 static void takeOffButtonPressed(Fl_Widget* widget, void* listener);
 
 KeyboardView::KeyboardView() :
-        Fl_Group(20, 55, 1280, 900, "Keyboard - Solution"),
-        _takeOffButton(25, 65, 100, 30, "Take off or land"),
-        _videoWidget(200, 65, 960, 720),
+        Fl_Group(0, 80, 500, 900, "Keyboard - Solution"),
+        _takeOffButton(25, 100, 100, 30, "Take off or land"),
+        _videoWidget(200, 100, 960, 720),
         _listener(nullptr) {
     _videoWidget.resizable(_videoWidget);
     end();

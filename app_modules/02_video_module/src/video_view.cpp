@@ -3,8 +3,8 @@
 static void onTakePicturePressed(Fl_Widget* widget, void* listener);
 
 VideoView::VideoView() :
-        Fl_Group(20, 55, 1280, 720, "Video"),
-        _takePictureBtn(25, 65, 100, 30, "Take Picture"),
+        Fl_Group(0, 80, 500, 900, "Video"),
+        _takePictureBtn(25, 100, 100, 30, "Take Picture"),
         _listener(nullptr) {
     end();
 }
