@@ -12,6 +12,10 @@ find_package(OpenCV REQUIRED CONFIG
         PATHS ${CMAKE_BINARY_DIR}/libs/opencv)
 unset(BUILD_SHARED_LIBS)
 
+set(CMAKE_HELP_DIR ${CMAKE_SOURCE_DIR}/cmake)
+set(RUNTIME_CONTEXT ${CMAKE_BINARY_DIR}/app_basic)
+set(MODULE_LIB_DIR ${RUNTIME_CONTEXT}/libs)
+
 # Applications
 add_subdirectory(app_basic)
 add_subdirectory(app_common)

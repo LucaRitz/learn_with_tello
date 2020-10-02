@@ -31,8 +31,14 @@
 *.out
 *.app
 
+CMakeSettings.json
+
 cmake-build-debug/
 cmake-build-release/
+out/
+.vs/
+.idea/
+
 doc/logs/*
 doc/**/*.aux
 doc/**/*.log

@@ -33,6 +33,6 @@ public:
 
 private:
     mainview::IListener* _listener;
-    Fl_Tabs _tabs;
     Fl_Menu_Bar _menuBar;
+    Fl_Tabs _tabs;
 };
