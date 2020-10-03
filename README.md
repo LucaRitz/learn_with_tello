@@ -6,7 +6,7 @@ To complete the tasks, you need the following things:
 - This repository
 - A Ryze Tech Tello EDU drone
 - The exercise-and-solution pdf (included in this repo)<br>
-It is place at doc/documentation/learn_with_tello.pdf
+It is place at doc/<language>/learn_with_tello.pdf
 
 ## Supported Platforms
 At the moment, the tasks are only available for windows (due the lack of implementation for<br/>
@@ -23,7 +23,7 @@ Once you've cloned, forked or whatever the repo, you can make the targets with c
 
 TODO: Add cmake example
 
-We recommend using CLion.
+We recommend using CLion but Visual Studio 2019 also works.
 
 ## Dependencies
 C++ Tello Library: https://github.com/LucaRitz/tello<br/>

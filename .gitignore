@@ -38,9 +38,3 @@ cmake-build-release/
 out/
 .vs/
 .idea/
-
-doc/logs/*
-doc/**/*.aux
-doc/**/*.log
-doc/**/*.toc
-doc/**/*.lof
