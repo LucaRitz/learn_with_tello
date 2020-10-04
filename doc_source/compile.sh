@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 rm -f /interface/output/*
 
-find /miktex/work -type f -print0 | xargs -0 dos2unix --
-cd /miktex/work/${LANGUAGE}
+find /source -type f -print0 | xargs -0 dos2unix --
+cd /source/${LANGUAGE}
+
+for d in */ ; do
+    mkdir /interface/output/$d
+done
 
 pdflatex -output-directory /interface/output learn_with_tello.tex
 pdflatex -output-directory /interface/output learn_with_tello.tex

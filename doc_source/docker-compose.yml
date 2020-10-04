@@ -7,8 +7,8 @@ services:
     environment:
       - LANGUAGE=${LANGUAGE}
     volumes:
-      - ./tex/${LANGUAGE}:/miktex/work/${LANGUAGE}
-      - ./tex/common:/miktex/work/common
-      - ../doc/logs/${LANGUAGE}:/miktex/.miktex/texmfs/data/miktex/log
+      - ./tex/${LANGUAGE}:/source/${LANGUAGE}
+      - ./tex/common:/source/common
+      #- ../doc/logs/${LANGUAGE}:/miktex/.miktex/texmfs/data/miktex/log
       - ../doc/${LANGUAGE}:/interface/output
     container_name: learn_with_tello_build_doc
