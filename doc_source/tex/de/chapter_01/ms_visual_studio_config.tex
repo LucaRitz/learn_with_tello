@@ -1,0 +1,56 @@
+\subsection{MS Visual Studio 2019 konfigurieren}
+Sobald sichergestellt ist, dass obig aufgeführte Voraussetzungen gegeben sind, kann die IDE MS Visual Studio 2019
+gestartet werden. Führe die folgenden Schritte durch:
+\begin{itemize}
+    \item Auf der rechten Seite siehst du diverse Optionen, um ein Projekt zu öffnen oder zu erstellen. Wähle dort
+    'Lokalen Ordner öffnen' aus.
+    \item Navigiere zu deinem Verzeichnis, in das du das Projekt gespeichert hast.
+    \item Öffne den Projektornder (meistens 'learn\textunderscore with\textunderscore tello').
+    \item Nun wird das Projekt geöffnet und die CMake-Generierung gestartet, welche eventuell fehlschlagen wird.
+    Sollte dies der Fall sein, so ist die CMake-Version des Visual-Studios zu gering und wir müssen diese manuell
+    einstellen. Öffne in dem Fall den Explorer und navigiere in deinen Projektordner. Dort siehst du die Datei 'CMakeSettings.json'.
+    Öffne diese in einem Editor und füge die folgende Zeile hinzu:\\
+    \begin{lstlisting}[language=json, basicstyle=\small]
+    {
+        ...
+        "cmakeExecutable": "D:\\Prog\\CMake-3.18.2\\bin\\cmake.exe"
+        ...
+    }
+    \end{lstlisting}
+    \item Sobald diese Änderungen gemacht sind und du zurück ins Visual Studio wechselst, siehst du, dass CMake bereits
+    die Generierung gestartet hat. CMake macht nun in einem ersten Schritt das Basissetup, um der IDE mitzuteilen,
+    wie das Projekt aufgebaut und wie die 'targets' generiert werden sollen.
+\end{itemize}
+Sobald CMake fertig ist, kannst du nun die nachfolgend aufgeführten 'Startelemente' erstellen.
+Um dies zu bewerkstelligen, verschaffst du dir zuerst einen kleinen Überblick der IDE. Im Zentrum steht das
+Code-Fenster, welches den meisten Platz einnimmt. Auf der rechten Seite siehst du den Projektmappen-Explorer. Dort
+werden die verschiedenen Verzeichnisse sowie der Code gelistet.
+Oben kannst du einen grünen Play-Button sehen, daneben steht zu Beginn 'Startelement auswählen'. Klappe dieses auf
+und du solltest mindestens folgende Startelemente sehen:
+\begin{description}
+    \item[00\textunderscore base\textunderscore module.dll] Beinhaltet Basiseinstellungen für die Drohne(n)
+    \item[01\textunderscore keyboard\textunderscore module.dll] Die ersten paar Übungen.
+    \item[01\textunderscore keyboard\textunderscore module\textunderscore solution.dll] Die Lösungen zu den Übungen.
+    \item[99\textunderscore template.dll] Dies ist eine Vorlage für neue Module, das kann ignoriert werden.
+    \item[app\textunderscore basic.exe] Die Hauptapplikation (Um diese zu starten, drücke den grünen Play-Button hinter dem Dropdown mit den 'targets')
+    \item[app\textunderscore common\textunderscore video.dll] Eine Bibliothek mit Code, den Module verwenden können.
+\end{description}
+Um ein Startelement zu kompilieren, muss dieses ausgewählt werden. Danach drückst du den Play-Button, um den Build
+zu starten.\\
+Für den Anfang reicht es, wenn die folgenden Startelemente erstellt werden (Achtung, nach dem Build einer .dll wird ein
+Fehler angezeigt, dass diese nicht ausgeführt werden kann. Das ist ganz normal, klicke den Fehler einfach weg und
+schliesse die automatisch geöffnete Datei launch.vs.json ohne zu speichern):
+\begin{itemize}
+    \item 00\textunderscore base\textunderscore module.dll
+    \item 01\textunderscore keyboard\textunderscore module.dll
+    \item app\textunderscore common\textunderscore video.dll
+    \item app\textunderscore basic.exe
+\end{itemize}
+Schliesse die nun geöffnete Anwendung.\\
+Wenn die Builds allesamt ohne Fehler durchlaufen, dann kannst du deine Tello-EDU-Drohne starten.
+Du solltest sie zuerst mit der offiziellen App kalibrieren.
+Stelle sie danach auf den Boden, wo genug Platz drumherum und nach oben ist. Die Drohne sollte gelb blinken, das heisst,
+sie wartet auf eine Verbindung. Wähle in den WLAN-Einstellungen das Tello-EDU WLAN aus.\\
+Wähle nun das Startelement 'app\textunderscore basic' aus und drücke den Play-Button. Um deine Umgebung zu testen, drücke
+den Button 'Take off' in der Applikation. Wenn die Drohne fliegt und du das Kamerabild der Drohne siehst, hast du alles richtig gemacht
+und kannst nun mit den Übungen starten. Drücke den Knopf nochmals, um die Drohne zu landen und schliesse die Applikation.

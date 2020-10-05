@@ -10,5 +10,6 @@ for d in */ ; do
 done
 
 pdflatex -output-directory /interface/output learn_with_tello.tex
+biber /interface/output/learn_with_tello.bcf
 pdflatex -output-directory /interface/output learn_with_tello.tex
 pdflatex -output-directory /interface/output learn_with_tello.tex
