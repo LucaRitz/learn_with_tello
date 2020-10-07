@@ -32,10 +32,11 @@
         \newcount\basenumberlength
         \currentValue=\resultInBaseTen
         \basenumberlength=0
+
         \loop
-            \advance \basenumberlength + 1
-            \currentValue=\fpeval{\currentValue/2}
-            \ifnum \currentValue > 1
+        \advance \basenumberlength + 1
+        \currentValue=\numexpr \currentValue / 2\relax
+        \ifnum \currentValue > 1
         \repeat
 
         \pgfmathsetbasenumberlength{\basenumberlength}
