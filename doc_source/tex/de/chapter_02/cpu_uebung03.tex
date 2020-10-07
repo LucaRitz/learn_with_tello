@@ -1,0 +1,116 @@
+\newpage
+\subsection{Übung 3 - Logische Operationen}
+Was uns jetzt noch fehlt ist das Verständnis von logischen Operationen. Es geht im Grunde nur darum,
+zwei Bedingungen auszuwerten und auf einen Wahrheitswert zu überführen. Nehmen wir als Beispiel einmal an,
+dass wir die folgenden Aussagen haben:
+\begin{description}
+    \item[Aussage A] Ein Flugzeug ist zum Tauchen gebaut worden.
+    \item[Aussage B] 9 ist durch 3 teilbar.
+    \item[Aussage C] 5 ist eine Primzahl.
+    \item[Aussage D] YB gewinnt in der nächsten Saison die Championsleague.
+\end{description}
+Wir haben offensichtlich zwei Aussagen (B und C), die der Wahrheit entsprechen und eine
+Aussage (A), die nicht zutrifft. Weiterhin gibt es eine Aussage (D), bei der wir den Wahrheitswert nur
+erahnen können, aber nicht genau kennen. Doch wir können festhalten, dass in der klassischen Aussagenlogik
+eine Aussage also entweder wahr oder falsch sein kann.\cite{wikipedia:aussagenlogik}\\
+
+Wir können diese Aussage nun verknüpfen und daraus eine Neue generieren. Dazu schauen wir uns zwei
+Werkzeuge an:
+\begin{itemize}
+    \item AND (Und) $\land$
+    \item OR (Oder) $\lor$
+\end{itemize}
+Angenommen, wir setzen die Aussagen B und C mithilfe des logischen AND zusammen, dann
+lautet die neue Aussage:\\$B \land C$\glqq 9 ist durch 3 teilbar UND 5 ist eine Primzahl\flqq\\
+Diese Aussage ist ebenfalls wahr.
+
+\begin{exerciseseries}[columns=1,solsubrule=\hrule]{}
+    Wir wollen nun mithilfe dieser Verknüpfungen ein paar Aussagen zusammensetzen. Kreuze das korrekte Resultat an.
+    \begin{exercise}
+        $A \land B$\\
+        Wahr $\square$ \hspace{1cm} Falsch $\square$
+    \end{exercise}
+    \begin{solution}
+        Wahr $\square$ \hspace{1cm} Falsch $\boxtimes$
+    \end{solution}
+
+    \begin{exercise}
+        $A \lor B$\\
+        Wahr $\square$ \hspace{1cm} Falsch $\square$
+    \end{exercise}
+    \begin{solution}
+        Wahr $\boxtimes$ \hspace{1cm} Falsch $\square$
+    \end{solution}
+
+    \begin{exercise}
+        $B \lor C$\\
+        Wahr $\square$ \hspace{1cm} Falsch $\square$
+    \end{exercise}
+    \begin{solution}
+        Wahr $\boxtimes$ \hspace{1cm} Falsch $\square$
+    \end{solution}
+\end{exerciseseries}
+
+\newpage
+Zuletzt wollen wir uns noch kurz ansehen, wie wir diese Operationen auch auf binären Zahlen durchführen können
+und wie das Resultat aussieht. Dazu betrachten wir uns folgenden Zahlen, welche nun eine Aussage darstellen.
+\begin{description}
+    \item[Aussage A] 1101 $(13)_{10}$
+    \item[Aussage B] 1111 $(15)_{10}$
+\end{description}
+Um diese Operation nun korrekt durchführen zu können, brauchen wir eine Wahrheitstabelle, um nachschauen zu können,
+was bei bestimmten Kombinationen passiert.\\
+Die Warheitstabelle für ein logisches AND sieht folgendermassen aus.
+\[
+    \begin{array}{c | c c}
+        \land & 0 & 1 \\ \hline
+        0 & 0 & 0 \\
+        1 & 0 & 1 \\
+    \end{array}
+\]
+Die Warheitstabelle für ein logisches OR sieht folgendermassen aus.
+\[
+    \begin{array}{c | c c}
+        \lor & 0 & 1 \\ \hline
+        0 & 0 & 1 \\
+        1 & 1 & 1 \\
+    \end{array}
+\]
+Wir führen nun ein logisches AND auf der Aussage A und B durch.
+Dies sieht folgendermassen aus:
+\opandbin{13}{15}{13}
+Das Resultat dieser Operation ist also wieder 1101 $(13)_{10}$.
+\newpage
+\begin{exerciseseries}[columns=1,solsubrule=\hrule]{}
+    Führe folgende logischen Operationen durch und bestimme auch gleich die Zahl im Zehnersystem.
+    \begin{exercise}
+        $11001 \land 00110$\\
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opandbin{25}{6}{0}
+        Dies entspricht $(0)_{10}$.
+    \end{solution}
+
+    \begin{exercise}
+        $11001 \lor 00110$\\
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opandbin{25}{6}{31}
+        Dies entspricht $(31)_{10}$.
+    \end{solution}
+
+    \begin{exercise}
+        $1111 \land 0110$\\
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opandbin{15}{6}{6}
+        Dies entspricht $(6)_{10}$.
+    \end{solution}
+\end{exerciseseries}
+
+\newpage
+\subsection{\solutionsname}
+\loadSolutions

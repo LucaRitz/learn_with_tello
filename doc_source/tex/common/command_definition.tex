@@ -25,6 +25,22 @@
     \usepackage{xifthen}
     \sodef\carrystyle{}{0.45em}{0em}{-0.25em}
 
+    \newcommand{\opandbin}[3]{
+        \oplogicalbin{##1}{##2}{##3}{$\land$}
+    }
+
+    \newcommand{\oporbin}[3]{
+        \oplogicalbin{##1}{##2}{##3}{$\lor$}
+    }
+
+    \newcommand{\oplogicalbin}[4] {
+        \begin{tabular}[t]{rr}
+            &\pgfmathbin{##1}\pgfmathresult\\
+            ##4&\pgfmathbin{##2}\pgfmathresult\\\hline
+            &\pgfmathbin{##3}\pgfmathresult
+        \end{tabular}
+    }
+
     \newcommand{\opaddbin}[3]{
         \newcommand{\resultInBaseTen}{\fpeval{##1+##2}}
 
