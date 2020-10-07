@@ -18,6 +18,48 @@
     \usepackage{amssymb}
     \usepackage{amsmath}
 
+    \usepackage{xlop}
+    \usepackage{tikz}
+    \usepackage{xfp}
+    \usepackage{soul}
+    \usepackage{xifthen}
+    \sodef\carrystyle{}{0.45em}{0em}{-0.25em}
+
+    \newcommand{\opaddbin}[3]{
+        \newcommand{\resultInBaseTen}{\fpeval{##1+##2}}
+
+        \newcount\currentValue
+        \newcount\basenumberlength
+        \currentValue=\resultInBaseTen
+        \basenumberlength=0
+        \loop
+            \advance \basenumberlength + 1
+            \currentValue=\fpeval{\currentValue/2}
+            \ifnum \currentValue > 1
+        \repeat
+
+        \pgfmathsetbasenumberlength{\basenumberlength}
+        \begin{tabular}[t]{rr}
+            \ifthenelse{\isempty{##3}}%
+            {}% if #3 is empty
+            {&\pgfcarrybin{##3}\\}% if #3 is not empty
+            &\pgfmathbin{##1}\pgfmathresult\\
+            +&\pgfmathbin{##2}\pgfmathresult\\\hline
+            &\pgfmathbin{\resultInBaseTen}\pgfmathresult
+        \end{tabular}
+    }
+
+    \newcommand{\pgfcarry}[1]{
+        \begin{tiny}
+            \expandafter\carrystyle\expandafter{##1}
+        \end{tiny}
+    }
+
+    \newcommand{\pgfcarrybin}[1] {
+        \pgfmathbin{##1}
+        \pgfcarry{\pgfmathresult}
+    }
+
     \usepackage{a4wide}
     \usepackage[#1]{babel}
     \usepackage[local,nolabels,exerciseaslist,usesolutionserieslabels]{exsol}

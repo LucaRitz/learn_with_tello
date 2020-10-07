@@ -1,0 +1,59 @@
+\subsection{Übung 2 - Einmal mehr eine Addition}
+Wir wollen nun noch einen Schritt weitergehen  und uns einen Teil der Arbeit der \gls{ALU} anschauen,
+nämlich die Addition zweier Zahlen im binären System. Um den Einstieg zu vereinfachen, wollen wir uns zuerst mit
+etwas auseinandersetzen, das wir bereits in der Unterstufe gelernt haben. Die schriftliche Addition im 10er-System.\\
+Weisst du noch, wie das geht?\\
+\begin{exerciseseries}[columns=1,solsubrule=\hrule]{}
+    \begin{exercise}
+        Addiere die Zahlen 25 und 2 schriftlich. Wenn du nicht mehr weisst, wie das geht, dann schaue in den Lösungen.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opadd[carryadd=true,lastcarry]{25}{2}
+    \end{solution}
+    \begin{exercise}
+        Addiere die Zahlen 25 und 7.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opadd[carryadd=true,lastcarry]{25}{7}
+    \end{solution}
+    \begin{exercise}
+        Addiere die Zahlen 99 und 99.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opadd[carryadd=true,lastcarry]{99}{99}
+    \end{solution}
+    \begin{exercise}
+        Addiere die Zahlen 45 und 72.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opadd[carryadd=true,lastcarry]{45}{72}
+    \end{solution}
+\end{exerciseseries}
+\newpage
+Da wir jetzt ein wenig repetiert haben, können wir uns etwas Neuem widmen. Wir machen jetzt genau dasselbe, nur
+im binären System.
+
+\begin{exerciseseries}[columns=1,solsubrule=\hrule]{}
+    \begin{exercise}
+        Addiere die Zahlen 2 (10) und 1 (1) schriftlich im Binärsystem.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opaddbin{2}{1}{}
+    \end{solution}
+    \begin{exercise}
+        Addiere die Zahlen 3 (11) und 1 (1) schriftlich im Binärsystem.
+        \vspace{5cm}
+    \end{exercise}
+    \begin{solution}
+        \opaddbin{3}{1}{6}
+    \end{solution}
+\end{exerciseseries}
+
+\newpage
+\subsection{\solutionsname}
+\loadSolutions
